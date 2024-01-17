@@ -25,6 +25,8 @@ export class AuthenticationComponent implements OnInit  {
   serviceLogin(): void {
     this.authService.login(this.email, this.password).subscribe(
     {  next: (data) => {
+      console.log(data, ' data component');
+      
      this.userData = data;
      this.roleUser = this.userData?.user.role
       this.authService.setUserRole(this.roleUser);
@@ -32,6 +34,8 @@ export class AuthenticationComponent implements OnInit  {
       this.authService.getToken(this.userData?.accessToken)
     },
     error: (error) => {
+      console.log(error);
+      
       this.errorMessage = error.error
     }}
     );

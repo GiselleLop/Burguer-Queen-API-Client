@@ -7,17 +7,29 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthenticationServiceService {
-  private url_API = 'http://localhost:8080/login';
+ // private url_API = 'http://localhost:8080/login';
 
+private serverAPI = 'https://burger-queen-api-mock-puce.vercel.app/server.js'
+  private url_API = 'https://burger-queen-api-mock-puce.vercel.app/login'
  accessToken: string | undefined = undefined;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<any> {
-    const loginUrl = `${this.url_API}`;
+  //  const loginUrl = `${this.url_API}`;
+  const loginUrl = `${this.serverAPI}`;
     const body = { email, password };
-    return this.http.post(loginUrl, body);
+   // const serveer = this.getServer()
+//    console.log(serveer);
+  //  console.log(this.http.post(loginUrl, body));
+    //return this.http.post(loginUrl, body);
+return this.http.get(loginUrl)
   }
+
+  // getServer(email: string, password: string): Observable<any> {
+  //   const body = { email, password };
+  //   return this.http.post(this.serverAPI, body);
+  // }
 
   setUserRole(userRole: string | undefined) {
     localStorage.setItem('user', JSON.stringify(userRole));
