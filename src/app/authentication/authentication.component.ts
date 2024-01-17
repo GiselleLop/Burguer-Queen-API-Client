@@ -1,6 +1,6 @@
 import { Component, OnInit  } from '@angular/core';
 import { AuthenticationServiceService } from '../services/authentication/authentication-service.service';
-import { Auth } from '../shared/interfaces/interface';
+import { Auth, userInterface } from '../shared/interfaces/interface';
 
 @Component({
   selector: 'app-authentication',
@@ -16,6 +16,8 @@ export class AuthenticationComponent implements OnInit  {
   email: string = '';
   password: string = '';
   private userData: Auth | undefined;
+ // private userData: userInterface | undefined;
+// private profiles: userInterface | undefined;
   userRole: string | undefined;
   errorMessage: string | null = null;
   roleUser: string | undefined = ''
@@ -25,13 +27,27 @@ export class AuthenticationComponent implements OnInit  {
   serviceLogin(): void {
     this.authService.login(this.email, this.password).subscribe(
     {  next: (data) => {
+      console.log(data, ' data component');
+      //this.profiles = data
+      //this.profiles.find(profile => profile.email === email && profile.password === password);
+     // const profilefound = t.find(profile => profile.email === this.email && profile.password === this.password);
+
+  // for (const user of data) {
+  //   if (user.email === this.email || user.password === this.password) {
+  //     this.userData = data;
+  //   }
+  //}
      this.userData = data;
+    // console.log(this.userData?.user.role, ' data component');
+      
      this.roleUser = this.userData?.user.role
       this.authService.setUserRole(this.roleUser);
       this.authService.redirectToRoleSpecificScreen();
       this.authService.getToken(this.userData?.accessToken)
     },
     error: (error) => {
+      console.log(error);
+      
       this.errorMessage = error.error
     }}
     );

@@ -7,8 +7,10 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthenticationServiceService {
-  private url_API = 'http://localhost:8080/login';
-
+ private url_API = 'http://localhost:8080/login';
+  
+  //private url_API = 'http://localhost:3000/users';
+  
  accessToken: string | undefined = undefined;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -17,6 +19,7 @@ export class AuthenticationServiceService {
     const loginUrl = `${this.url_API}`;
     const body = { email, password };
     return this.http.post(loginUrl, body);
+    //return this.http.get(loginUrl);
   }
 
   setUserRole(userRole: string | undefined) {
