@@ -29,6 +29,9 @@ export class AuthenticationServiceService {
     if (userRole === 'waiter') {
       this.router.navigate(['/waiter']);
     }
+    if (userRole === 'chef') {
+      this.router.navigate(['/kitchen']);
+    }
   }
 
   setToken(token: string | undefined) {

@@ -8,6 +8,7 @@
 
 .products-ordered{
     height: 89%;
+    overflow-x: auto;
 }
 
 table{

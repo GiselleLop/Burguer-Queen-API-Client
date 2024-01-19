@@ -25,6 +25,7 @@ export class OrdersService {
   breakfastMenu: productInter[] = [];
   lunchAndDinnerMenu: productInter[] = [];
   currentMenu: productInter[] = [];
+ // orderId: number = 0;
 
   getProducts(): Observable<productInter[]>{
   //  const token = this.authService.getToken()
@@ -61,4 +62,16 @@ export class OrdersService {
   getClickedProduct(): Observable<productInter | null> {
     return this.clickedProductSubject.asObservable();
   }
+
+  getOrders(): Observable<Order[]> {
+      return this.http.get<Order[]>(this.URL_ORDERS, {headers: this.headers})
+  }
+  
+  deleteOrder(orderId: number): Observable<void> {
+    const deleteUrl = `${this.URL_ORDERS}/${orderId}`;
+    return this.http.delete<void>(deleteUrl, { headers: this.headers });
+  }
+
+
+
 }
