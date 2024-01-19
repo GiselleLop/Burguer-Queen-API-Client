@@ -3,17 +3,22 @@
 <table>
     <thead>
         <tr>
-            <th>ID</th>
+            <th>Number</th>
             <th>Product</th>
             <th>Price</th>
         </tr>
     </thead>
    <tbody>
-    <tr>
-    </tr>
+    <tr *ngFor="let product of products">
+        <!-- <td>{{product}}</td> -->
+        <td>{{product.name}}</td>
+        <td>{{ product.price| currency: 'USD': 'symbol' }}</td>
+        </tr> 
    </tbody>
 </table>
+<p *ngIf="listOrder.length === 0">No hay productos en la orden.</p>
 </div>
+
 <div class="total">
     <p class="total-label"> Total: </p>
     <p class="total-sum"> $ 0.00 </p>

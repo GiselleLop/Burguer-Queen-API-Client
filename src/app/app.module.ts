@@ -17,7 +17,6 @@ import { LogoutModalComponent } from './components/logout-modal/logout-modal.com
 import { ClientNameInputComponent } from './components/client-name-input/client-name-input.component';
 import { SendOrderButtonComponent } from './components/send-order-button/send-order-button.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
