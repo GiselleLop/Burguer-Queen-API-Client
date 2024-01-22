@@ -32,7 +32,7 @@ export class OrderSummaryComponent implements OnInit {
     
   if (existingProduct) {
     existingProduct.qty += 1;
-    this.totalPrice += product.price * existingProduct.qty;
+    this.totalPrice += product.price 
 
   } else {
     this.orderedProducts.push({ qty: 1, product });
