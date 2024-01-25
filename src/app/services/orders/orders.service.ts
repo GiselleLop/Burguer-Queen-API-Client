@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthenticationServiceService } from '../authentication/authentication-service.service';
-import { map, catchError, filter  } from 'rxjs/operators';
+import { map, catchError  } from 'rxjs/operators';
 import { productInter } from 'src/app/shared/interfaces/product';
 import { Order } from 'src/app/shared/interfaces/order';
 
@@ -33,6 +33,12 @@ export class OrdersService {
 
   private clickedOrderDeliveredSubject = new BehaviorSubject<Order | null>(null);
   clickedOrderDelivered$ = this.clickedOrderDeliveredSubject.asObservable();
+
+  private PendingDeliveringOrdersSubject = new BehaviorSubject<Order[] | null>(null);
+  PendingDeliveringOrders$ = this.PendingDeliveringOrdersSubject.asObservable();
+
+   DeliveredSubject = new BehaviorSubject<Order[] | null>(null);
+  Delivered$ = this.DeliveredSubject.asObservable();
 
   
 
@@ -98,19 +104,29 @@ export class OrdersService {
     this.clickedOrderDeliveredSubject.next(order)
   }
 
-  getPendingDeliveringOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.URL_ORDERS}`, { headers: this.headers }).pipe(
-      map((orders: Order[]) => {
-        return orders.filter(order => order.status === 'Pending' || order.status === 'Delivering');
-      })
-    );
+  setPendingDeliveringOrders() {
+  // return this.http.get<Order[]>(`${this.URL_ORDERS}`, { headers: this.headers }).pipe(
+  //     map((orders: Order[] ) => {
+  //       return orders.filter(order => order.status === 'Pending' || order.status === 'Delivering');
+  //     })
+  //   );  
+  this.getOrders().subscribe(resp=> {
+    const filter =  resp.filter(order => order.status === 'Pending' || order.status === 'Delivering')
+   this.PendingDeliveringOrdersSubject.next(filter)
+  })
+
+
   }
 
-  getDeliveredOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.URL_ORDERS}`, { headers: this.headers }).pipe(
-      map((orders: Order[]) => {
-        return orders.filter(order => order.status === 'Delivered');
-      })
-    );
+  getDeliveredOrders() {
+    // return this.http.get<Order[]>(`${this.URL_ORDERS}`, { headers: this.headers }).pipe(
+    //   map((orders: Order[]) => {
+    //     return orders.filter(order => order.status === 'Delivered');
+    //   })
+    // );
+    this.getOrders().subscribe(resp=> {
+      const filter =  resp.filter(order => order.status === 'Delivered')
+    // this.DeliveredSubject.next(filter)
+    })
   }
 }

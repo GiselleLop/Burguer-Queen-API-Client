@@ -9,7 +9,7 @@ import { KitchenServiceService } from 'src/app/services/kitchen/kitchen-service.
   styleUrls: ['./orders-pending-delivering.component.css']
 })
 export class OrdersPendingDeliveringComponent implements OnInit {
-deliveringPendingList: Order[] = [];
+deliveringPendingList: Order[] | null | undefined = [];
 selectedOrderIndex: Order | null = null;
 selectedOrder: Order | null = null
 
@@ -20,39 +20,36 @@ selectedOrder: Order | null = null
   }
 
   ngOnInit(): void {
-    this.loadWaiterOrdersList()
-    this.ordersService.orderUpdated$.subscribe(() => {
-      this.loadWaiterOrdersList();
-    })
-
+    this.ordersService.setPendingDeliveringOrders()
+    //this.loadWaiterOrdersList()
+    // this.ordersService.orderUpdated$.subscribe(() => {
+    //   this.loadWaiterOrdersList();
+    // })
+    this.ordersService.PendingDeliveringOrders$.subscribe(resp => 
+      this.deliveringPendingList = resp
+      )
+     this.sortOrderByStatus();
+ 
   }
 
-  loadWaiterOrdersList() {
-    this.ordersService. getPendingDeliveringOrders().subscribe((resp => {
-      console.log('get order list ', resp);
-      this.deliveringPendingList = resp;
-      this.sortOrderByStatus();
-      console.log(this.deliveringPendingList);
-    })
-    );
-  }
 
   onOrderClick(order: Order): void {
     this.selectedOrderIndex = order;
     this.ordersService.setOrderToDelivered(order);
-    this.selectedOrder = order;
-    console.log('Desde el order pending Waiter/orders', this.selectedOrder);
+   // this.selectedOrder = order;
+   // console.log('Desde el order pending Waiter/orders', this.selectedOrder);
   }
 
   onDeliveredButtonClick(){
-    if(this.selectedOrder){
-      const orderId = this.selectedOrder.id;
+    if(this.selectedOrderIndex){
+      const orderId = this.selectedOrderIndex.id;
       const newStatus = 'Delivered';
       
-      console.log(orderId, 'Selected Order ID!!!!');
-      
+    this.deliveringPendingList = this.deliveringPendingList?.filter(order => order.id !== orderId);
+
      this.ordersService.updateOrderStatus(orderId, newStatus).subscribe(updatedOrder => {
       this.ordersService.notifyOrderUpdated(updatedOrder.id)
+     
      })
     }  
   }
@@ -67,7 +64,7 @@ selectedOrder: Order | null = null
   }
 
   sortOrderByStatus() {
-    this.deliveringPendingList.sort((a: Order, b: Order): number => {
+    this.deliveringPendingList?.sort((a: Order, b: Order): number => {
       if (a.status === b.status) {
         return 0
       }

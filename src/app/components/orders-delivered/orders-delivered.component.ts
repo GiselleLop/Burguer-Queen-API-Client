@@ -8,16 +8,15 @@ import { Order } from 'src/app/shared/interfaces/order';
   styleUrls: ['./orders-delivered.component.css']
 })
 export class OrdersDeliveredComponent implements OnInit {
-deliveredOrderList: Order[] = [];
+deliveredOrderList: Order[] | null = [];
 
   constructor(private ordersService: OrdersService) { }
 
   ngOnInit(): void {
-    this.ordersService.getDeliveredOrders().subscribe((resp => {
-      console.log('get order list ', resp);
-      this.deliveredOrderList = resp;
-      console.log(this.deliveredOrderList);
-    }))
+    this.ordersService.getDeliveredOrders()
+    this.ordersService.Delivered$.subscribe(resp => 
+      this.deliveredOrderList = resp
+      )
   }
 
   statusStyleWaiter(status: string): object {
