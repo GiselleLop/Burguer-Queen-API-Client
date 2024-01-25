@@ -13,18 +13,10 @@ deliveringPendingList: Order[] | null | undefined = [];
 selectedOrderIndex: Order | null = null;
 selectedOrder: Order | null = null
 
-  constructor(private ordersService: OrdersService, private kitchenService: KitchenServiceService) { 
-    // this.subscription = this.ordersService.clickedOrderDelivered$.subscribe(resp => {
-    //   this.selectedOrder = resp;      console.log(this.selectedOrder, ' show order');
-    // });
-  }
+  constructor(private ordersService: OrdersService, private kitchenService: KitchenServiceService) {}
 
   ngOnInit(): void {
     this.ordersService.setPendingDeliveringOrders()
-    //this.loadWaiterOrdersList()
-    // this.ordersService.orderUpdated$.subscribe(() => {
-    //   this.loadWaiterOrdersList();
-    // })
     this.ordersService.PendingDeliveringOrders$.subscribe(resp => 
       this.deliveringPendingList = resp
       )
@@ -36,9 +28,7 @@ selectedOrder: Order | null = null
   onOrderClick(order: Order): void {
     this.selectedOrderIndex = order;
     this.ordersService.setOrderToDelivered(order);
-   // this.selectedOrder = order;
-   // console.log('Desde el order pending Waiter/orders', this.selectedOrder);
-  }
+    }
 
   onDeliveredButtonClick(){
     if(this.selectedOrderIndex){
@@ -48,8 +38,7 @@ selectedOrder: Order | null = null
     this.deliveringPendingList = this.deliveringPendingList?.filter(order => order.id !== orderId);
 
      this.ordersService.updateOrderStatus(orderId, newStatus).subscribe(updatedOrder => {
-      this.ordersService.notifyOrderUpdated(updatedOrder.id)
-     
+      this.ordersService.getDeliveredOrders()
      })
     }  
   }

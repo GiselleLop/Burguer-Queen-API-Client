@@ -5,18 +5,17 @@ import { Order } from 'src/app/shared/interfaces/order';
 @Component({
   selector: 'app-orders-delivered',
   templateUrl: './orders-delivered.component.html',
-  styleUrls: ['./orders-delivered.component.css']
+  styleUrls: ['./orders-delivered.component.css'],
 })
 export class OrdersDeliveredComponent implements OnInit {
-deliveredOrderList: Order[] | null = [];
+  deliveredOrderList: Order[] | null = [];
 
-  constructor(private ordersService: OrdersService) { }
+  constructor(private ordersService: OrdersService) {}
 
   ngOnInit(): void {
-    this.ordersService.getDeliveredOrders()
-    this.ordersService.Delivered$.subscribe(resp => 
-      this.deliveredOrderList = resp
-      )
+    this.ordersService.Delivered$.subscribe(
+      (resp) => (this.deliveredOrderList = resp)
+    );
   }
 
   statusStyleWaiter(status: string): object {
@@ -25,6 +24,6 @@ deliveredOrderList: Order[] | null = [];
     } else if (status === 'Pending') {
       return { color: '#EE0909' };
     }
-    return { color: '#3BBA26' }
+    return { color: '#3BBA26' };
   }
 }

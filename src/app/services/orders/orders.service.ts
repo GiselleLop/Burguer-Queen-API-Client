@@ -25,7 +25,7 @@ export class OrdersService {
   clientNameSource = new BehaviorSubject<string>('');
   clientName$ = this.clientNameSource.asObservable();
   orderUpdatedSubject = new Subject<number>();
-  orderUpdated$ = this.orderUpdatedSubject.asObservable();
+ orderUpdated$ = this.orderUpdatedSubject.asObservable();
 
   breakfastMenu: productInter[] = [];
   lunchAndDinnerMenu: productInter[] = [];
@@ -93,7 +93,7 @@ export class OrdersService {
   
   notifyOrderUpdated(orderId: number){
     this.orderUpdatedSubject.next(orderId);
-  }
+   }
 
   updateOrderTime(orderId: number, elapsedTime: string): Observable<Order>{
     const updateTime = { elapsedTime }
@@ -105,11 +105,6 @@ export class OrdersService {
   }
 
   setPendingDeliveringOrders() {
-  // return this.http.get<Order[]>(`${this.URL_ORDERS}`, { headers: this.headers }).pipe(
-  //     map((orders: Order[] ) => {
-  //       return orders.filter(order => order.status === 'Pending' || order.status === 'Delivering');
-  //     })
-  //   );  
   this.getOrders().subscribe(resp=> {
     const filter =  resp.filter(order => order.status === 'Pending' || order.status === 'Delivering')
    this.PendingDeliveringOrdersSubject.next(filter)
@@ -119,14 +114,9 @@ export class OrdersService {
   }
 
   getDeliveredOrders() {
-    // return this.http.get<Order[]>(`${this.URL_ORDERS}`, { headers: this.headers }).pipe(
-    //   map((orders: Order[]) => {
-    //     return orders.filter(order => order.status === 'Delivered');
-    //   })
-    // );
     this.getOrders().subscribe(resp=> {
       const filter =  resp.filter(order => order.status === 'Delivered')
-    // this.DeliveredSubject.next(filter)
+       this.DeliveredSubject.next(filter)
     })
   }
 }
