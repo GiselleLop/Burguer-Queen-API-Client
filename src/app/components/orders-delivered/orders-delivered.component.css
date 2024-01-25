@@ -6,3 +6,20 @@
     border-radius: 15px;
     overflow-x: auto;
     }
+    .orderedProducts {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        overflow: auto;
+        font-size: 30px;
+    }
+
+    .noOrderSelected {
+        font-family: 'Patrick Hand', cursive;
+        font-size: 30px; 
+        display: flex;
+        place-content: center;
+        padding: 0 10px;
+    }
+    

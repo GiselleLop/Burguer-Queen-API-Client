@@ -1,2 +1,10 @@
-<div class="orders-delivering-pending"></div>
-<app-button-delivered></app-button-delivered>
+<div class="orders-delivering-pending">
+    <div *ngFor="let order of orderList" class="orders" (click)="onOrderClick(order)" [style.background-color]="order === selectedOrderIndex ? '#FFAF74' : '#D9D9D9'">
+    <h2 class="clien-name">{{order.client}}</h2>
+    <h2 class="status" [ngStyle]="statusStyleWaiter(order.status)" >{{order.status}}</h2>
+    </div>
+</div>
+<app-button-delivered *ngIf='selectedOrderIndex else noOrderSelected' (click)="delivered(selectedOrderIndex)"></app-button-delivered>
+<ng-template #noOrderSelected >
+    <button>Delivered</button>
+  </ng-template>
