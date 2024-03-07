@@ -5,7 +5,7 @@ import { AuthenticationServiceService } from '../authentication/authentication-s
 import { map, catchError, filter  } from 'rxjs/operators';
 import { productInter } from 'src/app/shared/interfaces/product';
 import { Order } from 'src/app/shared/interfaces/order';
-
+import { orderedProducts } from 'src/app/shared/interfaces/order';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,9 +21,15 @@ export class OrdersService {
   })
 
   clickedProductSubject = new BehaviorSubject<productInter | null>(null);
-  
+  clickedProduct$ =  this.clickedProductSubject.asObservable();
+
   clientNameSource = new BehaviorSubject<string>('');
   clientName$ = this.clientNameSource.asObservable();
+
+  
+  orderPendingSelectedSubject = new BehaviorSubject<Order | null>(null);
+  orderPendingSelected$ = this.orderPendingSelectedSubject.asObservable();
+
   orderUpdatedSubject = new Subject<number>();
   orderUpdated$ = this.orderUpdatedSubject.asObservable();
 
@@ -55,18 +61,6 @@ export class OrdersService {
      return this.http.post<Order>(this.URL_ORDERS, order, {headers: this.headers})
    }
 
-   setClickedProduct(product: productInter): void {
-    this.clickedProductSubject.next(product);
-  }
-
-  getClickedProduct(): Observable<productInter | null> {
-    return this.clickedProductSubject.asObservable();
-  }
-
-  setClientName(value: string): void{
-    this.clientNameSource.next(value);
-  }
-
   getOrders(): Observable<Order[]>{
       return this.http.get<Order[]>(`${this.URL_ORDERS}`, {headers: this.headers})
     }
@@ -80,10 +74,6 @@ export class OrdersService {
     return this.http.patch<Order>(`${this.URL_ORDERS}/${orderId}`, updateData, { headers: this.headers })
   }
   
-  notifyOrderUpdated(orderId: number){
-    this.orderUpdatedSubject.next(orderId);
-  }
-
   updateOrderTime(orderId: number, elapsedTime: string): Observable<Order>{
     const updateTime = { elapsedTime }
     return this.http.patch<Order>(`${this.URL_ORDERS}/${orderId}`, updateTime, { headers: this.headers })
@@ -104,5 +94,20 @@ export class OrdersService {
       })
     );
   }
+  
+
+  // orderedProductsSummary(product: productInter): orderedProducts[]{
+  //   const orderedProducts: orderedProducts[] = [];
+  //   let totalPrice: number = 0;
+  //   const existingProduct = orderedProducts.find(orderedProduct => orderedProduct.product?.id === product.id);
+  // if (existingProduct) {
+  //   existingProduct.qty += 1;
+  //   totalPrice += product.price 
+  // } else {
+  //   orderedProducts.push({ qty: 1, product });
+  //   totalPrice += product.price 
+  // }
+  // return orderedProducts
+  // }
 
 }

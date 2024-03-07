@@ -1,10 +1,24 @@
-    <div class="order" *ngFor="let order of orderList" (click)="onOrderClick(order)" [style.background-color]="order === selectedOrderIndex ? '#FFAF74' : '#D9D9D9'">
-        <div class="name-time">
-            <h2 class="client-name">{{order.client}}</h2>
-            <p class="time">Time: {{order.elapsedTime}}</p>
-        </div>
-        <div class="order-status">
-            <h2 class="status" [ngStyle]="statusStyle(order.status)">{{order.status}}</h2>
-        </div>
-      
-    </div>
+<div *ngIf="orderList.length === 0" class="noOrdersAvailable">
+  <p>No orders available</p>
+</div>
+<div
+  class="order"
+  *ngFor="let order of orderList"
+  (click)="onOrderClick(order)"
+  [style.background-color]="
+    order === selectedOrderIndex ? '#ffceab' : '#D9D9D9'
+  "
+>
+  <div class="name-time">
+    <h2 class="client-name">{{ order.client }}</h2>
+    <p class="time">
+      <strong>Time: </strong
+      >{{ order.elapsedTime ? order.elapsedTime : "Calculating..." }}
+    </p>
+  </div>
+  <div class="order-status">
+    <h2 class="status" [ngStyle]="statusStyle(order.status)">
+      {{ order.status }}
+    </h2>
+  </div>
+</div>

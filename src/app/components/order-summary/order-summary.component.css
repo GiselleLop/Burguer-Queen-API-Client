@@ -1,9 +1,10 @@
 .order-summary{
-    height: 385px;
+    height: 100%;
     background-color: #D9D9D9;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 .products-ordered{
@@ -22,8 +23,7 @@ table{
 
 .total{
     display: flex;
-    justify-content: center;
-    column-gap: 40%;
+    justify-content:space-around;
     height: auto;
     font-size: 35px;
   background: #FFAF74;

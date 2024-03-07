@@ -1,4 +1,10 @@
+* {
+margin: 0;
+padding: 0;
+}
 .principal-container {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     place-content: center;
@@ -6,21 +12,42 @@
     font-family: 'Patrick Hand', cursive;
 }
 
-app-orders-pending-delivering, app-orders-delivered {
+.orderPendigContainer, app-orders-delivered {
 width: 40%;
-height: 450px;
+height: 68%;
 display: flex;
 flex-direction: column;
 align-items: center;
-gap: 10px
+gap: 15px;
+
 }
 
+app-orders-pending-delivering {
+width: 100%;
+max-height: 100%;
+}
+
+.backButton {
+    position: absolute;
+    margin-left: 8%;
+    top: 7%;
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+}
+.backButton:hover, app-buttons:hover {
+    box-shadow: 0px 0px 9px 0px #FFFCFC
+}
+
+app-buttons  {
+    border-radius: 10px;
+    width: 50%;
+    height: 10%;
+}
 
 @media (orientation: portrait) {
     .principal-container {
         flex-direction: column;
-        width: 100%;
-        display: flex;
         align-items: center;
         }
         app-orders-pending-delivering, app-orders-delivered {

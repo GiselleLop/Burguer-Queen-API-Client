@@ -1,6 +1,9 @@
 <app-header></app-header>
-<app-button-back (click)="backToMenu()"></app-button-back>
+<app-buttons class='backButton' [btnClass]="'imageButton'" (click)="backToMenu()" [btnSrcImage]="'../../../assets/images/back.png'"></app-buttons>
 <div class="principal-container">
-   <app-orders-pending-delivering></app-orders-pending-delivering>
+   <div class="orderPendigContainer">
+      <app-orders-pending-delivering></app-orders-pending-delivering>
+      <app-buttons *ngIf="orderPendingSelected?.status === 'Delivering'" [btnName]="'Delivered'" (click)="onDeliveredButtonClick()"></app-buttons>
+   </div>
    <app-orders-delivered></app-orders-delivered>
 </div>
