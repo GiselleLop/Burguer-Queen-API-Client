@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthenticationServiceService {
-  private url_API = 'https://api-burguer-queen-bqac1.onrender.com/login';
+  private url_API = 'https://burger-queen-api-mock-gis.onrender.com/login';
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<any> {
