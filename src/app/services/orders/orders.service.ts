@@ -5,7 +5,7 @@ import { AuthenticationServiceService } from '../authentication/authentication-s
 import { map, catchError, filter  } from 'rxjs/operators';
 import { productInter } from 'src/app/shared/interfaces/product';
 import { Order } from 'src/app/shared/interfaces/order';
-import { orderedProducts } from 'src/app/shared/interfaces/order';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,8 +13,8 @@ export class OrdersService {
 
   constructor(private authService: AuthenticationServiceService, private http: HttpClient) { }
 
-  private URL_PRODUCTS = 'https://api-burguer-queen-bqac1.onrender.com/products';
-  private URL_ORDERS = 'https://api-burguer-queen-bqac1.onrender.com/orders';
+  private URL_PRODUCTS = 'https://burger-queen-api-mock-gis.onrender.com/products';
+  private URL_ORDERS = 'https://burger-queen-api-mock-gis.onrender.com/orders';
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${this.authService.getToken()}`
@@ -94,20 +94,4 @@ export class OrdersService {
       })
     );
   }
-  
-
-  // orderedProductsSummary(product: productInter): orderedProducts[]{
-  //   const orderedProducts: orderedProducts[] = [];
-  //   let totalPrice: number = 0;
-  //   const existingProduct = orderedProducts.find(orderedProduct => orderedProduct.product?.id === product.id);
-  // if (existingProduct) {
-  //   existingProduct.qty += 1;
-  //   totalPrice += product.price 
-  // } else {
-  //   orderedProducts.push({ qty: 1, product });
-  //   totalPrice += product.price 
-  // }
-  // return orderedProducts
-  // }
-
 }

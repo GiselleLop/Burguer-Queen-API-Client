@@ -47,7 +47,7 @@ describe('OrdersComponent', () => {
 
   it('should load orders list', fakeAsync(() => {
     const req = httpTestingController.expectOne(
-      'https://api-burguer-queen-bqac1.onrender.com/orders'
+      'https://burger-queen-api-mock-gis.onrender.com/orders'
     );
     expect(req.request.method).toEqual('GET');
     req.flush(mockOrders);
