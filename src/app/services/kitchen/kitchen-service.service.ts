@@ -14,7 +14,7 @@ export class KitchenServiceService {
   constructor() {
    }
   
-  setOrderKitchen(order: Order) {
+  setOrderKitchen(order: Order | null) {
     this.clickedOrderSubject.next(order)
     }
 

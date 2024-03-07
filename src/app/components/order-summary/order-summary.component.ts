@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { OrdersService } from 'src/app/services/orders/orders.service';
 import { productInter } from 'src/app/shared/interfaces/product';
-import { Order, orderedProducts } from 'src/app/shared/interfaces/order';
+import { orderedProducts } from 'src/app/shared/interfaces/order';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,7 +18,7 @@ export class OrderSummaryComponent implements OnInit {
   alertMessage: string | null = null;
 
   constructor(private ordersService: OrdersService) { 
-    this.productSubscription = this.ordersService.getClickedProduct().subscribe(product => {
+    this.productSubscription = this.ordersService.clickedProduct$.subscribe(product => {
       if(product) {
         this.onProductClicked(product)
       }
@@ -27,6 +27,8 @@ export class OrderSummaryComponent implements OnInit {
     this.clientNameSubscription = this.ordersService.clientName$.subscribe(value => {
       this.clientName = value;
     });
+
+   
   }
 
   ngOnInit(): void {}
@@ -42,32 +44,6 @@ export class OrderSummaryComponent implements OnInit {
   }
   }
 
-  onSendOrderClick(): string | void {
-    if (this.clientName === '' && this.orderedProducts.length === 0) {
-     return this.alertMessage = 'There are no products selected and client name is null.';
-    } else if (this.clientName === '') {
-      return  this.alertMessage = 'Client name is required';
-    } else if (this.orderedProducts.length === 0) {
-      return this.alertMessage = 'No products selected';}
-    const order: Order = {
-      client: this.clientName, 
-      products: this.orderedProducts,
-      status: 'Pending', 
-      dataEntry: new Date(),
-      id: 0, 
-      total: this.totalPrice,
-    };
-    this.ordersService.postOrder(order).subscribe((response => {
-      this.ordersService.setClientName('')
-      this.orderedProducts =  [];
-      this.totalPrice = 0; 
-      this.alertMessage = 'Order sent successfully';
-      setTimeout(() => {
-        this.alertMessage = null;
-      }, 2000); 
-    }),
-    );
-  }
 
   deleteProduct(product: orderedProducts) {
     const indexProduct = this.orderedProducts.indexOf(product)

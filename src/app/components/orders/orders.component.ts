@@ -19,10 +19,7 @@ export class OrdersComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-   
-
-  }
+  ngOnInit(): void {}
 
   loadOrdersList() {
     this.ordersService.getPendingDeliveringOrders().subscribe((resp => {    
@@ -35,14 +32,14 @@ export class OrdersComponent implements OnInit {
   onOrderClick(order: Order): void {
     this.selectedOrderIndex = order;
     this.kitchenService.setOrderKitchen(order)
+    
   }
-
 
   statusStyle(status: string): object {
     if (status === 'Delivering') {
-      return { color: '#3BBA26' };
+      return { color: '#228811' };
     } 
-    return status === 'Pending' ? { color: '#EE6A09' } : { color: '#3BBA26' };
+    return status === 'Pending' ? { color: '#EE6A09' } : { color: '#228811' };
   }
 
   sortOrderByStatus() {

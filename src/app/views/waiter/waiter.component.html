@@ -1,24 +1,26 @@
-<div class="waiter-view">
-    <app-header>
-    </app-header>
-    
-    <app-button-orders-status (click)="viewOrdersStatus()"></app-button-orders-status>
-  <div class="containerPrincipal">
+<app-header></app-header>
+<app-buttons [btnClass] ="'btnNotifications'" class='ordersStatusButton' (click)="viewOrdersStatus()" [btnSrcImage]="'../../../assets/images/cocina.png'"></app-buttons>
+<div class="containerPrincipal">
 
-    <div class="orders">
-        <div class="buttons">
-            <app-breakfast-button [isSelected]="isBreakfastSelected"  (selected)="handleBreakfastSelection()"></app-breakfast-button>
-            <app-lunch-and-dinner-button [isSelected]="isLunchAndDinnerSelected" (selected)="handleLunchAndDinnerSelection()"></app-lunch-and-dinner-button>
-        </div>
-        <app-client-name-input></app-client-name-input>
-        <div class="products-container">
-    <app-products *ngFor="let product of currentMenu" [product] = 'product' >
-    </app-products>
-        </div>
+  <div class="orders">
+    <div class="buttonsContainerMenu">
+      <app-buttons class='buttonMenu' [btnName]="'Breakfast'" [isSelected]="isBreakfastSelected"  (selected)="handleBreakfastSelection()"></app-buttons>
+      <app-buttons class='buttonMenu' [btnName]="'Lunch and Dinner'" [isSelected]="isLunchAndDinnerSelected"  (selected)="handleLunchAndDinnerSelection()"></app-buttons>
     </div>
-    <div class="order-summary-container">
-        <app-order-summary></app-order-summary>
+
+    <app-client-name-input></app-client-name-input>
+    <div class="products-container">
+      <app-products *ngFor="let product of currentMenu" [product] = 'product' >
+      </app-products>
     </div>
   </div>
+
+  <div class="order-summary-container">
+    <app-order-summary></app-order-summary>
+    <app-buttons class='sendOrderButton' [btnName]="'Send Order'" (click)="onSendOrderClick()"></app-buttons>
+    <h1 *ngIf="alertMessage" [ngClass]="{'success-message': alertMessage === 'Order sent successfully', 'error-message': alertMessage !== 'Order sent successfully'}">{{alertMessage}}</h1>
+  </div>
+  
 </div>
+
 

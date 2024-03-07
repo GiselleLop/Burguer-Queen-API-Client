@@ -1,16 +1,12 @@
-<div class="order-details-container">
-   <div class='orderedProducts' *ngIf="showOrder && showOrder.products.length > 0; else noOrderSelected">
-    <h3>Ordered Products</h3>
-      <ul>
-        <li *ngFor="let product of showOrder.products">
-        x{{ product.qty }}   {{ product.product?.name }}
-        </li>
-      </ul>
+<div class='orderedProducts'>
+  <h3 *ngIf="showOrder">ORDERED PRODUCTS</h3>
+  <ul  *ngIf="showOrder && showOrder.products.length > 0; else noOrderSelected">  
+    <li *ngFor="let product of showOrder.products">
+        x{{ product.qty }} {{ product.product?.name }}
+    </li>
+  </ul>
+  <ng-template #noOrderSelected>
+    <p class="noOrder">No order selected. Please choose an order.</p>
+  </ng-template>
+    
 </div>
-<ng-template #noOrderSelected >
-  <div class="noOrderSelected">
-    <p>No order selected. Please choose an order.</p>
-  </div>
-</ng-template>
-</div>
-<app-button-done-kitchen (click)="onButtonDone()"></app-button-done-kitchen>

@@ -4,5 +4,6 @@
       class="logoBurgerQueen"
     />
     <h1 class="title">Burger Queen</h1>
-    <app-logout></app-logout>
+    <app-buttons [btnSrcImage]="'../../../assets/images/cerrar-sesion.png'"  (click)="openLogoutConfirmationModal()"></app-buttons>
+    <!-- <app-logout></app-logout> -->
 </div>

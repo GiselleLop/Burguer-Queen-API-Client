@@ -1,0 +1,5 @@
+<button class="{{ btnClass }}" (click)="select()" [ngStyle]="getButtonSelectedStyle()">{{btnName}} 
+    <img *ngIf="btnSrcImage" src="{{btnSrcImage}}">
+    <p class='notification' *ngIf="notificationsNumber > 0 && btnClass === 'btnNotifications'">{{notificationsNumber}}</p>
+</button>
+

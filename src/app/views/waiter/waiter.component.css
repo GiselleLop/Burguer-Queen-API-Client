@@ -9,34 +9,26 @@ place-content: center;
 align-items: center;
 gap: 20px;
 margin: 0 20px;
+height: 75%;
 }
 
-.buttons{
+.buttonsContainerMenu{
     height: fit-content;
     width: 100%;
     display: flex;
-    place-content: center;
-    gap: 10px;
+    justify-content: space-between;
 }
+.buttonMenu {
+    width: 49%;
+}
+    
 app-client-name-input {
 width: 100%;
 height: 55px;
 }
 
-app-breakfast-button, app-lunch-and-dinner-button{
-    width: fit-content;
-}
-
-app-breakfast-button{
-    justify-self: center;
-}
-
-app-lunch-and-dinner-button{
-    justify-self: center;
-}
 
 .orders{
-    height: 450px;
     display: flex;
     flex-direction: column;
     width: 45%;
@@ -59,22 +51,60 @@ app-lunch-and-dinner-button{
 }
 
 .order-summary-container{
-    height: fit-content;
     width: 40%;
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 app-order-summary {
 display: flex;
 flex-direction: column;
 gap: 20px;
+width: 100%;
+height: 100%;
 }
 
-app-button-orders-status {
+.ordersStatusButton {
     position: absolute;
-    margin-left: 5%;
+    margin-left: 8%;
     top: 7%;
-  align-self: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
   }
+
+  .success-message, .error-message  {
+    color: green;
+    margin: -16px 0 0 0;
+    font-size: 30px;
+    }
+    
+    .error-message {
+        color: red;
+    }
+    
+    .success-message {
+        animation: fadeInOut 2s ease-in-out;
+      }
+    .sendOrderButton {
+    width: 80%;
+    display: flex;
+    margin-bottom: 10px;
+    border-radius: 10px;
+
+}
+
+    .sendOrderButton:hover, .ordersStatusButton:hover {
+        box-shadow: 0px 0px 9px 0px #FFFCFC
+    }
+    
+    .orders, .order-summary-container {
+        height: 90%;
+    }
+  
 @media (orientation: portrait) {
     .containerPrincipal {
         flex-direction: column;

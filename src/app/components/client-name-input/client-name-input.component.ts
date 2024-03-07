@@ -17,6 +17,6 @@ export class ClientNameInputComponent implements OnInit {
   }
   
   updateClientNameinService(value:string){
-   this.ordersService.setClientName(value);
+   this.ordersService.clientNameSource.next(value);
   }
 }

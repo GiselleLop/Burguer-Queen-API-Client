@@ -24,5 +24,3 @@
     <p class="total-sum"> $ {{totalPrice}} </p>
 </div>
 </div>
-<app-send-order-button (click)="onSendOrderClick()"></app-send-order-button>
-<h1 *ngIf="alertMessage" [ngClass]="{'success-message': alertMessage === 'Order sent successfully', 'error-message': alertMessage !== 'Order sent successfully'}">{{alertMessage}}</h1>

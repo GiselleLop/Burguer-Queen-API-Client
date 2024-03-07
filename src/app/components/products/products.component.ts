@@ -17,7 +17,7 @@ export class ProductsComponent implements OnInit {
 
   onProductClick() {
    if(this.product){
-      this.ordersService.setClickedProduct(this.product)
+      this.ordersService.clickedProductSubject.next(this.product)
     }
   }
 }

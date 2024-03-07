@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/services/orders/orders.service';
 import { Order } from 'src/app/shared/interfaces/order';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalOrderNotReadyComponent } from '../modal-order-not-ready/modal-order-not-ready.component';
-
-
+//import { ModalOrderNotReadyComponent } from '../modal-order-not-ready/modal-order-not-ready.component';
 
 @Component({
   selector: 'app-orders-pending-delivering',
@@ -35,28 +33,29 @@ selectedOrder: Order | null = null
   }
 
   onOrderClick(order: Order): void {
+    this.ordersService.orderPendingSelectedSubject.next(order)
     this.selectedOrderIndex = order;
     this.selectedOrder = order;
   }
 
-  onDeliveredButtonClick(){
-    if(this.selectedOrder && this.selectedOrder.status === 'Delivering'){
-      const orderId = this.selectedOrder.id;
-      const newStatus = 'Delivered';
+  // onDeliveredButtonClick(){
+  //   if(this.selectedOrder && this.selectedOrder.status === 'Delivering'){
+  //     const orderId = this.selectedOrder.id;
+  //     const newStatus = 'Delivered';
             
-     this.ordersService.updateOrderStatus(orderId, newStatus).subscribe(updatedOrder => {
-      this.ordersService.notifyOrderUpdated(updatedOrder.id)
+  //    this.ordersService.updateOrderStatus(orderId, newStatus).subscribe(updatedOrder => {
+  //     this.ordersService.orderUpdatedSubject.next(updatedOrder.id)
     
-     })
-    }  
-    if(this.selectedOrder && this.selectedOrder.status === 'Pending'){
-      this.openDialog()
-    }
-  }
+  //    })
+  //   }  
+  //   if(this.selectedOrder && this.selectedOrder.status === 'Pending'){
+  //     this.openDialog()
+  //   }
+  // }
 
-  openDialog(): void {
-    this.dialog.open(ModalOrderNotReadyComponent);
-  }
+  // openDialog(): void {
+  //   this.dialog.open(ModalOrderNotReadyComponent);
+  // }
 
   statusStyleWaiter(status: string): object {
     if (status === 'Delivering') {
