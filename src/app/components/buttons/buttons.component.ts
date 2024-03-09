@@ -30,9 +30,9 @@ export class ButtonsComponent implements OnInit {
 }
 
   getButtonSelectedStyle(): { [key: string]: string} {
-    if (this.btnName === 'Send Order' || this.btnName === 'Delivered' ) {
+    if (this.btnName === 'Send Order' || this.btnName === 'Delivered' || this.btnName === 'Done' ) {
       return {
-        'background-color': this.btnName ? '#EE6A09' : '#D9D9D9',
+        'background-color': this.btnName ? 'transparent' : '#D9D9D9',
         'color': this.btnName ? 'white' : 'black',
         'padding': this.btnName ? '10px 0' : '0',
 

@@ -27,8 +27,17 @@ export class AuthenticationServiceService {
   redirectToRoleSpecificScreen() {
     const userRole = this.getUserRole();
     if (userRole === 'waiter') {
-      this.router.navigate(['/waiter']);
+       this.router.navigate(['/waiter']);
     } else if (userRole === 'chef') {
+      this.router.navigate(['/kitchen']);
+    }
+  }
+  ///
+  redirectToRole(role: any) {
+    //const userRole = this.getUserRole();
+    if (role === 'waiter') {
+      this.router.navigate(['/waiter']);
+    } else if (role === 'chef') {
       this.router.navigate(['/kitchen']);
     }
   }

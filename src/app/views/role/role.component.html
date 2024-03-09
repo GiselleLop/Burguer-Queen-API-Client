@@ -1,0 +1,10 @@
+<app-header></app-header> 
+<div class="principal-container" >
+    <!-- <app-kitchen></app-kitchen> -->
+    <app-orders *ngIf="userRole === 'chef'"></app-orders>
+    <app-order-details *ngIf="userRole === 'chef'"></app-order-details>
+
+    <app-waiter *ngIf="userRole === 'waiter'"></app-waiter>
+
+    
+</div>

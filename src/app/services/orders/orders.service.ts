@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthenticationServiceService } from '../authentication/authentication-service.service';
-import { map, catchError, filter  } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { productInter } from 'src/app/shared/interfaces/product';
 import { Order } from 'src/app/shared/interfaces/order';
 

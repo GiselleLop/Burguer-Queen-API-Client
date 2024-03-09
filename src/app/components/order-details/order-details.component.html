@@ -1,12 +1,16 @@
-<div class='orderedProducts'>
-  <h3 *ngIf="showOrder">ORDERED PRODUCTS</h3>
-  <ul  *ngIf="showOrder && showOrder.products.length > 0; else noOrderSelected">  
-    <li *ngFor="let product of showOrder.products">
+ <div class='orderedProducts'> 
+  <h3 *ngIf="orderSelected">ORDERED PRODUCTS</h3>
+
+  <ul  *ngIf="orderSelected && orderSelected.products.length > 0">
+       <li *ngFor="let product of orderSelected.products">
         x{{ product.qty }} {{ product.product?.name }}
     </li>
   </ul>
-  <ng-template #noOrderSelected>
-    <p class="noOrder">No order selected. Please choose an order.</p>
-  </ng-template>
-    
+
+  <p class="noOrder" *ngIf="!orderSelected">No order selected. Please choose an order.</p>
 </div>
+
+  <app-buttons *ngIf="orderSelected?.status === 'Pending'" [btnName]="'Done'" (click)="onButtonDone()"></app-buttons>
+        <h1 *ngIf="alertMessage" [ngClass]="{'success-message': alertMessage === 'Delivering order successfully', 'error-message': alertMessage !== 'Delivering order successfully'}">{{alertMessage}}</h1>
+
+

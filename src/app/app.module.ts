@@ -12,7 +12,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { LogoutModalComponent } from './components/logout-modal/logout-modal.component';
 import { ClientNameInputComponent } from './components/client-name-input/client-name-input.component';
-import { KitchenComponent } from './views/kitchen/kitchen.component';
 import { FormsModule } from '@angular/forms';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
@@ -21,6 +20,7 @@ import { OrdersPendingDeliveringComponent } from './components/orders-pending-de
 import { OrdersDeliveredComponent } from './components/orders-delivered/orders-delivered.component';
 import { ModalOrderNotReadyComponent } from './components/modal-order-not-ready/modal-order-not-ready.component';
 import { ButtonsComponent } from './components/buttons/buttons.component';
+import { RoleComponent } from './views/role/role.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,6 @@ import { ButtonsComponent } from './components/buttons/buttons.component';
     OrderSummaryComponent,
     LogoutModalComponent,
     ClientNameInputComponent,
-    KitchenComponent,
     OrdersComponent,
     OrderDetailsComponent,
     WaiterOrderStatusComponent,
@@ -39,6 +38,7 @@ import { ButtonsComponent } from './components/buttons/buttons.component';
     OrdersDeliveredComponent,
     ModalOrderNotReadyComponent,
     ButtonsComponent,
+    RoleComponent,
   ],
   imports: [
     BrowserModule,
